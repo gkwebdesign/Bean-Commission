@@ -10,20 +10,26 @@
             const salesAmount = parseFloat(document.getElementById("salesAmount").value) || 0;
             const commissionRate = parseFloat(document.getElementById("commissionRate").value) || 0;
             const hoursWorked = parseFloat(document.getElementById("hoursWorked").value) || 0;
-            
+            const stockCount = parseFloat(document.getElementById("stockCount").value) || 0;
+
             // Commission calculation
             const commissionEarned = (salesAmount * (commissionRate / 100)).toFixed(2);
             
-            // Earnings from hours worked
+            // Earnings from hours worked (items made)
             const hourlyRate = 10; // Fixed hourly rate
             const earningsFromHours = (hoursWorked * hourlyRate).toFixed(2);
             
+            // Stock earnings
+            const stockPrice = 2; // Fixed price per stock
+            const stockEarnings = (stockCount * stockPrice).toFixed(2);
+
             // Total earnings
-            const totalEarnings = (parseFloat(commissionEarned) + parseFloat(earningsFromHours)).toFixed(2);
-            
+            const totalEarnings = (parseFloat(commissionEarned) + parseFloat(earningsFromHours) + parseFloat(stockEarnings)).toFixed(2);
+
             // Display results
             document.getElementById("commissionResult").textContent = `Commission Earned: $${commissionEarned}`;
             document.getElementById("hourlyEarningsResult").textContent = `Earnings from Hours Worked: $${earningsFromHours}`;
+            document.getElementById("stockEarningsResult").textContent = `Earnings from Stock: $${stockEarnings}`;
             document.getElementById("totalEarningsResult").textContent = `Total Earnings: $${totalEarnings}`;
         }
     </script>
@@ -41,18 +47,18 @@
         <input type="number" id="commissionRate" step="0.1" oninput="calculateEarnings()">
     </div>
     <div>
-        <label for="hoursWorked">Items Made:</label>
+        <label for="hoursWorked">Stock Made:</label>
         <input type="number" id="hoursWorked" step="0.1" oninput="calculateEarnings()">
+    </div>
+    <div>
+        <label for="stockCount">Purchased ingredients:</label>
+        <input type="number" id="stockCount" step="1" oninput="calculateEarnings()">
     </div>
     <h2>Results:</h2>
     <p id="commissionResult">Commission Earned: $0.00</p>
-    <p id="hourlyEarningsResult">Items Made: $0.00</p>
+    <p id="hourlyEarningsResult">Earnings from stock made: $0.00</p>
+    <p id="stockEarningsResult">Earnings from Stock: $0.00</p>
     <p id="totalEarningsResult">Total Earnings: $0.00</p>
+    
 </body>
 </html>
-
-
-
-
-
-
